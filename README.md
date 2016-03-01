@@ -4,9 +4,9 @@ Pump control with Csharp Applicaiton
 Pump Cycle Upgrade
 Ryan Hutchinson
 Spring 2016
-1 Objective
+##1 Objective
 Modify or create software that allows users to control 8-10 pumps through user given cycles.
-2 Inital Ideas
+##2 Inital Ideas
 1. Best Approach will be to leave the program the way it is and add on to it. The program might be
 complete but it is very unorganized and hard to follow what the ideas were behind the decision making
 process. Initial ideas are as follows:
@@ -22,7 +22,8 @@ iii. will need to have the abilty to create custom cycles for unknown circumstan
 2. ALL Ideas will have manual override or the ability to control specific pumps. Decision needs to be
 made on if a feature is needed that will be able to choose if cycle will continue as scheduled or you
 will create a new schedule for it.
-3 Time
+
+##3 Time
 Biggest time commitment will not be in working on Labview itself. The largest time commitment will be
 working out the logic of the program followed by testing and debugging of decided logic. The easiest way to
 test all the logic is to speed up time. This is another feature that can be decided on. The ability to run through
