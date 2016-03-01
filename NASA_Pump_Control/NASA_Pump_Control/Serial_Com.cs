@@ -11,9 +11,9 @@ namespace NASA_Pump_Control
     {
         public class test
         {
-            string comport = "COM1";
+            string comport = "COM4";
             int baud = 4800;
-            int flow = 5;
+            int flow = 20;
             string error = "None";
 
             public test()
@@ -21,9 +21,29 @@ namespace NASA_Pump_Control
                 try
                 {
                     SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
-                    
-                    port.WriteLine("\02P01G0");
-                    port.WriteLine("\02P01S+" + flow);
+                    port.Open();
+                    //config
+                    string message = ((char)5).ToString();
+                    string message1 = ((char)2).ToString();
+                    string cr = ((char)'\r').ToString();
+                   
+                    port.Write(message + cr);
+                    System.Threading.Thread.Sleep(130);
+                    port.DiscardInBuffer();
+                    port.DiscardOutBuffer();
+                    port.Write(string.Format(message1));
+                    port.Write("P01"+cr);
+                    System.Threading.Thread.Sleep(130);
+                    port.Write(string.Format(message1));
+                    port.Write("P01R"+cr);
+                    //end_config
+                    System.Threading.Thread.Sleep(20);
+                    port.Write(string.Format(message1));
+                    port.Write("P01G0"+cr);
+                    port.Write(string.Format(message1));
+                    port.WriteLine("P01S+" + flow+ cr);
+
+                    port.Close();
                 }
                 catch (Exception e)
                 {
@@ -35,9 +55,18 @@ namespace NASA_Pump_Control
             {
                 try
                 {
+
+                    string message = ((char)5).ToString();
+                    string message1 = ((char)2).ToString();
+                    string cr = ((char)'\r').ToString();
+
                     SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
-                    port.WriteLine("\02P01G0");
-                    port.WriteLine("\02P01S+" + "");
+
+                    port.Open();
+                    port.Write(string.Format(message1));
+                    port.WriteLine("P01H" + cr);
+                 
+                    port.Close();
                 }
                 catch (Exception e)
                 {
@@ -51,6 +80,7 @@ namespace NASA_Pump_Control
                     SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
                     port.WriteLine("\02P01G0");
                     port.WriteLine("\02P01S+" + "");
+                    port.Close();
                 }
                 catch (Exception e)
                 {
@@ -64,6 +94,7 @@ namespace NASA_Pump_Control
                     SerialPort port = new SerialPort(comport_g, baud_g, Parity.Odd, 7, StopBits.One);
                     port.WriteLine("\02P01G0");
                     port.WriteLine("\02P01S+" + flow_g);
+                    port.Close();
                 }
                 catch (Exception e)
                 {
@@ -94,6 +125,7 @@ namespace NASA_Pump_Control
                     //end_config
                     port.WriteLine("\02P01G0");
                     port.WriteLine("\02P01S+" + flow);
+                    port.Close();
                 }
                 catch (Exception e)
                 {
@@ -103,6 +135,14 @@ namespace NASA_Pump_Control
             public string get_error()
             {
                 return error;
+            }
+
+            public void halt()
+            {
+                SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
+                port.WriteLine("\02P01H");
+                
+                port.Close();
             }
 
 

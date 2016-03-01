@@ -26,15 +26,15 @@ namespace NASA_Pump_Control
 
         private void btn_test_Click(object sender, EventArgs e)
         {
-            if (chk_config.Checked && chk_setspeed.Checked)
-            {
-                Serial_Com.test test1 = new Serial_Com.test(int.Parse(txt_speed.Text), "Test");
+            
+                Serial_Com.test test1 = new Serial_Com.test();
                 MessageBox.Show(test1.get_error());
-            }
+            
         }
 
         private void btn_halt_Click(object sender, EventArgs e)
         {
+            Serial_Com.test test2 = new Serial_Com.test(20);
 
         }
 
