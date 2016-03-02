@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Timeline.cs" />
+    <Compile Include="Cycle.cs" />
     <Compile Include="Serial_Com.cs">
       <SubType>Form</SubType>
     </Compile>
