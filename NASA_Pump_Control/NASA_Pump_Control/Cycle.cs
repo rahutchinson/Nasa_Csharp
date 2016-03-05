@@ -11,6 +11,10 @@ namespace NASA_Pump_Control
 
         int[] cycle_array = new int[2];
 
+        public Cycle()
+        {
+
+        }
 
         public Cycle(int on, int off)
         {
