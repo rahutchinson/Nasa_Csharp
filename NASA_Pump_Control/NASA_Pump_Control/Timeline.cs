@@ -59,6 +59,7 @@ namespace NASA_Pump_Control
             // This is the method to run when the timer is raised.
             private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
             {
+                myTimer.Enabled = false;
                 DateTime now_time = DateTime.Now;
                 long elapsed = now_time.Ticks - time_begin.Ticks;
 
