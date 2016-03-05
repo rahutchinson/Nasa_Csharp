@@ -16,7 +16,7 @@ namespace NASA_Pump_Control
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Pump_Form());
+            
         }
     }
 }

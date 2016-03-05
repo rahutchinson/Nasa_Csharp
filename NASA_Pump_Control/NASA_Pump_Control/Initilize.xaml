@@ -1,0 +1,14 @@
+﻿<UserControl x:Class="NASA_Pump_Control.UserControl1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:NASA_Pump_Control"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Button x:Name="btn_create_timeline" Content="Create Timeline" HorizontalAlignment="Left" Margin="10,224,0,0" VerticalAlignment="Top" Width="280" Click="btn_create_timeline_Click" Height="66" IsDefault="True" FontSize="26.667"/>
+        <Button x:Name="btn_pump_timeline_button" Content="Create Pump Timeline" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top" Width="126"/>
+
+    </Grid>
+</UserControl>
