@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="NASA_Pump_Control.UserControl1"
+﻿<UserControl x:Class="NASA_Pump_Control.Pump_new"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,8 +6,43 @@
              xmlns:local="clr-namespace:NASA_Pump_Control"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-        <Button x:Name="btn_create_timeline" Content="Create Tineline" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top" Width="75"/>
-
+    <Grid Margin="0,0,-25,108" Background="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">
+        <Grid HorizontalAlignment="Left" Height="107" Margin="10,10,0,0" VerticalAlignment="Top" Width="119" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
+            <Label x:Name="label" Content="Create Cycle" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" FontWeight="Bold" Margin="10,0,0,0" Width="99"/>
+            <TextBox x:Name="txt_time_on" HorizontalAlignment="Left" Margin="63,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+            <TextBox x:Name="txt_time_off" HorizontalAlignment="Left" Margin="63,59,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+            <Label x:Name="label1" Content="Time On" HorizontalAlignment="Left" Margin="1,29,0,0" VerticalAlignment="Top"/>
+            <Label x:Name="label1_Copy" Content="Time Off" HorizontalAlignment="Left" Margin="0,55,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btn_cycle_submit" Content="Submit" HorizontalAlignment="Left" Margin="10,82,0,0" VerticalAlignment="Top" Width="99"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="60" Margin="10,122,0,0" VerticalAlignment="Top" Width="119" Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}">
+            <Label x:Name="label_Copy" Content="Cycle Iterations" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="12,0,0,0"/>
+            <TextBox x:Name="txt_iterations" HorizontalAlignment="Left" Margin="10,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+            <Button x:Name="btn_iterations" Content="Submit" HorizontalAlignment="Left" Margin="61,30,0,0" VerticalAlignment="Top" Width="48"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="107" Margin="134,10,0,0" VerticalAlignment="Top" Width="181" Background="{DynamicResource {x:Static SystemColors.InactiveCaptionBrushKey}}">
+            <Label x:Name="label2" Content="Initial Start Time" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" FontWeight="Bold" Margin="24,0,0,0"/>
+            <TextBox x:Name="txt_start_hours" HorizontalAlignment="Left" Height="23" Margin="10,72,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49"/>
+            <TextBox x:Name="txt_start_minutes" HorizontalAlignment="Left" Height="23" Margin="64,72,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49"/>
+            <TextBox x:Name="txt_start_seconds" HorizontalAlignment="Left" Height="23" Margin="118,72,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="49"/>
+            <Label x:Name="label3" Content="Hours" HorizontalAlignment="Left" Margin="10,46,0,0" VerticalAlignment="Top" Width="49"/>
+            <Label x:Name="label3_Copy" Content="Minute" HorizontalAlignment="Left" Margin="64,46,0,0" VerticalAlignment="Top" Width="49"/>
+            <Label x:Name="label3_Copy1" Content="Seconds" HorizontalAlignment="Left" Margin="118,46,0,0" VerticalAlignment="Top" Width="49"/>
+            <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="32,28,0,0" TextWrapping="Wrap" Text="Initial time from day begin" VerticalAlignment="Top" FontSize="9.333"/>
+        </Grid>
+        <Grid HorizontalAlignment="Left" Height="60" Margin="134,122,0,0" VerticalAlignment="Top" Width="181" Background="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}">
+            <Label x:Name="label_Copy1" Content="Select COM Port" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="10,0,0,0"/>
+            <ComboBox x:Name="cmb_com_port" HorizontalAlignment="Left" Margin="28,26,0,0" VerticalAlignment="Top" Width="120">
+                <ComboBoxItem Content="COM1" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM2" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM3" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM4" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM5" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM6" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM7" HorizontalAlignment="Left" Width="118"/>
+                <ComboBoxItem Content="COM8" HorizontalAlignment="Left" Width="118"/>
+              
+            </ComboBox>
+        </Grid>
     </Grid>
 </UserControl>

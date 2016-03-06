@@ -16,18 +16,13 @@ using System.Windows.Shapes;
 namespace NASA_Pump_Control
 {
     /// <summary>
-    /// Interaction logic for UserControl1.xaml
+    /// Interaction logic for UserControl3.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class Issue_face : UserControl
     {
-        public UserControl1()
+        public Issue_face()
         {
             InitializeComponent();
-        }
-
-        private void btn_create_timeline_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

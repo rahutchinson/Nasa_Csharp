@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NASA_Pump_Control
 {
-    class Serial_Com : Pump_Form
+    class Serial_Com
     {
         public class test
         {

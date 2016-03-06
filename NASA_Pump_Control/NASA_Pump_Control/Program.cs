@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Forms;
 
 namespace NASA_Pump_Control
@@ -14,9 +15,13 @@ namespace NASA_Pump_Control
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            
+            Initial OP = new Initial();
+            var host = new Window();
+            host.Content = OP;
+            host.Show();
+
+            MessageBox.Show("test");
+
         }
     }
 }
