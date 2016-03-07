@@ -16,10 +16,9 @@ namespace NASA_Pump_Control
 
         }
 
-        public Cycle(int on, int off)
+        public Cycle(int[] _ar_cycle)
         {
-            cycle_array[0] = on;
-            cycle_array[1] = off;
+            cycle_array = _ar_cycle;
         }
         public int[] get_times()
         {

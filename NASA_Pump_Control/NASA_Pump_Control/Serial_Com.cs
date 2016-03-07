@@ -17,6 +17,11 @@ namespace NASA_Pump_Control
             int flow = 20;
     
 
+            public Serial()
+            {
+                MessageBox.Show("Serial");
+            }
+
             /// <summary>
             /// Constructor for class Serial.. 
             /// Initilizes checks pumps and then setups up for start.
@@ -52,7 +57,7 @@ namespace NASA_Pump_Control
 
             internal void pump_off()
             {
-                throw new NotImplementedException();
+                MessageBox.Show("PUMP OFF");
             }
         }
      

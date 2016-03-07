@@ -1,0 +1,30 @@
+﻿<Window x:Class="NASA_Pump_Control.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NASA_Pump_Control"
+        mc:Ignorable="d"
+        Title="Pump Control v.001_beta" Height="400" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".25*" />
+            <RowDefinition Height="2*" />
+           
+            <RowDefinition Height=".2*"/>
+        </Grid.RowDefinitions>
+        <Button  Name="btn_main_show" Content="Create Timeline" Click="btn_main_show_Click"/>
+        <StackPanel Name="stk_1_2" Grid.Row="0" Grid.Column="0"/>
+        <StackPanel Name="stk_1_3" Grid.Row="1"  Grid.Column="1"/>
+        <Button Name="btn_update" Content="Update" Grid.Row="3" Visibility="Hidden" Click="_update"/>
+        <Button Name="btn_main_start" Grid.Column="2" Grid.Row="2" Content="Start Timeline" Visibility="Hidden" Click="btn_main_start_Click"/>
+        
+    </Grid>
+</Window>
+
