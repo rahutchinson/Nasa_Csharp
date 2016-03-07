@@ -143,6 +143,8 @@ namespace NASA_Pump_Control
                 return node; 
             }
 
+           
+
           
         }
 
@@ -165,7 +167,8 @@ namespace NASA_Pump_Control
             {
                 this.time_start = time_start;
                 flow_rate = flow;
-                serial_con.set_comport(comport); //set com for pump
+                serial_con.set_comport(comport,flow); //set com for pump
+                
 
                 for(int i = 1; i < iterations; i++)
                 {

@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         <Button  Name="btn_main_show" Content="Create Timeline" Click="btn_main_show_Click"/>
         <StackPanel Name="stk_1_2" Grid.Row="0" Grid.Column="0"/>
-        <StackPanel Name="stk_1_3" Grid.Row="1"  Grid.Column="1"/>
+        <StackPanel Name="stk_1_3" Grid.Row="1"  Grid.Column="0"/>
         <Button Name="btn_update" Content="Update" Grid.Row="3" Visibility="Hidden" Click="_update"/>
         <Button Name="btn_main_start" Grid.Column="2" Grid.Row="2" Content="Start Timeline" Visibility="Hidden" Click="btn_main_start_Click"/>
         

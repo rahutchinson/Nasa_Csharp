@@ -14,12 +14,17 @@ namespace NASA_Pump_Control
         {
             string comport = "COM4";
             int baud = 4800;
-            int flow = 20;
-    
+            int flow = 0;
 
+            Timeline.Main_Timeline _main_timeline = new Timeline.Main_Timeline();
+
+            string message = ((char)5).ToString();  //ENQ
+            string message1 = ((char)2).ToString(); //STK
+            string cr = ((char)'\r').ToString();
+            
             public Serial()
             {
-                MessageBox.Show("Serial");
+                
             }
 
             /// <summary>
@@ -28,36 +33,65 @@ namespace NASA_Pump_Control
             /// </summary>
             public Serial(string port) // Change from test
             {
-                MessageBox.Show("Click ok to Test Pump");
-                string message = "Did Pump get contacted?";
-                string caption = "Choose Yes or no";
-                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-                DialogResult result = System.Windows.Forms.DialogResult.No;
                 
-
-                
-
-                while (result == System.Windows.Forms.DialogResult.No)
-                {
-                    result = MessageBox.Show(message, caption, buttons);
-                    MessageBox.Show("Check connections and Test again"); //TODO: this will have another test to run after the serial coms branch is imported
-                }
-
-                MessageBox.Show("Pump Good to Go");
             }
 
             public void pump_on()
             {
+                SerialPort port_ = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
+                System.Threading.Thread.Sleep(20);
+                port_.Write(string.Format(message1));
+                port_.Write("P01G0" + cr);
+                port_.Write(string.Format(message1));
+                port_.WriteLine("P01S+" + flow + cr);
                 MessageBox.Show("PUMP ON");
             }
-            public void set_comport(string port)
+            public void set_comport(string port,int flow)
             {
+                this.flow = flow;
+               
+                try
+                {
+                    SerialPort port_ = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
+                    port_.Open();
+                    //config
+                       //CR
+
+                    port_.Write(message + cr);
+                    System.Threading.Thread.Sleep(130);
+                    port_.DiscardInBuffer();
+                    port_.DiscardOutBuffer();
+                    port_.Write(string.Format(message1));
+                    port_.Write("P01" + cr);
+                    System.Threading.Thread.Sleep(130);
+                    port_.Write(string.Format(message1));
+                    port_.Write("P01R" + cr);
+                    //end_config
+                    
+
+                    port_.Close();
+                }
+                catch (Exception e)
+                {
+                    
+                }
                 comport = port;
             }
 
             internal void pump_off()
             {
+                SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
+
+                port.Open();
+                port.Write(string.Format(message1));
+                port.WriteLine("P01H" + cr);
+
+                port.Close();
                 MessageBox.Show("PUMP OFF");
+            }
+            internal void set_timeline(Timeline.Main_Timeline _given)
+            {
+                _main_timeline = _given;
             }
         }
      

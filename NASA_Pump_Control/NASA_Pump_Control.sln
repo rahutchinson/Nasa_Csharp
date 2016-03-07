@@ -5,16 +5,37 @@ VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NASA_Pump_Control", "NASA_Pump_Control\NASA_Pump_Control.csproj", "{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}"
 EndProject
+Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "Setup1", "Setup1\Setup1.isproj", "{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CD_ROM|Any CPU = CD_ROM|Any CPU
 		Debug|Any CPU = Debug|Any CPU
+		DVD-5|Any CPU = DVD-5|Any CPU
 		Release|Any CPU = Release|Any CPU
+		SingleImage|Any CPU = SingleImage|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
 		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
 		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{8EEC67AB-CCD0-45FF-9EFA-79AA44B914CB}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.CD_ROM|Any CPU.ActiveCfg = CD_ROM
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.CD_ROM|Any CPU.Build.0 = CD_ROM
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.Debug|Any CPU.ActiveCfg = DVD-5
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.Debug|Any CPU.Build.0 = DVD-5
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.DVD-5|Any CPU.ActiveCfg = DVD-5
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.DVD-5|Any CPU.Build.0 = DVD-5
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.Release|Any CPU.ActiveCfg = SingleImage
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.Release|Any CPU.Build.0 = SingleImage
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.SingleImage|Any CPU.ActiveCfg = SingleImage
+		{D7788DF5-1954-4A0E-A8F5-FF02BD38C1EA}.SingleImage|Any CPU.Build.0 = SingleImage
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
