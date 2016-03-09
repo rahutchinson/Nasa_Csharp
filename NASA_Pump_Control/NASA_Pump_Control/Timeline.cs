@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,16 +10,42 @@ namespace NASA_Pump_Control
 {
     class Timeline
     {
-        
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        public class Main_Timeline : Timeline
+        public class Main_Timeline : Timeline,INotifyPropertyChanged
         {
-            int total_days;
+            int total_days = 1;
             LinkedList<Pump_Timeline> pump_col = new LinkedList<Pump_Timeline>();
             DateTime time_begin;
             DateTime time_end;
             static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
+
+           
             
+            private long elapsed;
+            public long Elapsed
+            {
+                get
+                {
+                    return this.elapsed;
+                }
+                set
+                {
+                    elapsed = value;
+                    OnPropertyChanged("Elapsed");
+                }
+            }
+            
+
+            protected virtual void OnPropertyChanged(string v)
+            {
+                PropertyChangedEventHandler handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(v));
+                }
+            }
+
 
             /// <summary>
             /// Constructor for Main Timeline
@@ -49,10 +76,11 @@ namespace NASA_Pump_Control
                 myTimer.Enabled = true;
                 
                 myTimer.Start();
-                do
-                {
-                    myTimer.Tick += new EventHandler(TimerEventProcessor);
-                } while (DateTime.Compare(time_begin, time_end) < 0);
+                myTimer.Interval = 1;
+
+
+               myTimer.Tick += new EventHandler(TimerEventProcessor);
+                
             }
             
 
@@ -60,55 +88,54 @@ namespace NASA_Pump_Control
             private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
             {
                 myTimer.Stop();
-                
-                
-                System.TimeSpan elapsed_ = DateTime.Now - time_begin;
-                long elapsed = get_total_seconds(elapsed_);
+
+
+                System.TimeSpan elapsed_ = DateTime.Now - time_begin; 
+                Elapsed = get_total_seconds(elapsed_);
                 
 
                 for(LinkedListNode<Pump_Timeline> node = pump_col.First; node != null;)
                 {
                     int cycle_time_total = node.Value.get_next_cycle().Value.get_time_total();
-                    int cycle_multiplier = node.Value.get_remove_count();
+                    int cycle_multiplier = node.Value.remove_counter;
                     long timeline_start = node.Value.get_Start();
 
                     long timeline_end = node.Value.get_runtime_total();
                     int cycle_time_on = node.Value.get_next_cycle().Value.get_times()[0];
 
-                    
+
                     //All Pump on Scenarios
-                    if (elapsed == timeline_start || elapsed == timeline_start + (cycle_time_total * (cycle_multiplier - 1)))
-                        if (node.Value.get_state() == false)
+                    if (Elapsed == timeline_start || Elapsed == timeline_start + (cycle_time_total * (cycle_multiplier - 1)))
+                    {
+                        if (node.Value.Running == false)
                         {
-                            {
                                 node.Value.get_serial().pump_on();
-                                node.Value.set_state(true);
-                                MessageBox.Show(node.Value.ToString());
-                            }
+                                node.Value.Running = true;
+
                         }
+                    }
                     //All Pump off Scenarios
-                    if (elapsed == timeline_end || elapsed == cycle_time_on * cycle_multiplier)
-                        if (node.Value.get_state())
+                    if (Elapsed == timeline_end || Elapsed == cycle_time_on * cycle_multiplier)
+                    {
+                        if (node.Value.Running)
                         {
                             {
 
 
                                 node.Value.get_serial().pump_off();
-                                node.Value.set_state(false);
+                                node.Value.Running = false;
                                 node.Value.remove_cycle();
 
                             }
                         }
-                   
-                    
+
+                    }
                     node = node.Next;
                 }
 
-                if (DateTime.Compare(DateTime.Now, time_end) > 0)
-                { // Restarts the timer and increments the counter.
-
-                    myTimer.Start();
-                }
+                myTimer.Start();
+                
+                myTimer.Tick += new EventHandler(TimerEventProcessor);
             }
 
             public int get_total_seconds(TimeSpan _given)
@@ -148,16 +175,50 @@ namespace NASA_Pump_Control
           
         }
 
-        public class Pump_Timeline
+        public class Pump_Timeline : Timeline,INotifyPropertyChanged
         {
             Serial_Com.Serial serial_con = new Serial_Com.Serial();
             private long time_start;
             private int total_runtime;
             LinkedList<Cycle> pump_list = new LinkedList<Cycle>();
-            int remove_counter = 1;
+
             int flow_rate = 0;
-            Boolean running = false;
+            private Boolean running;
+
+            public Boolean Running
+            {
+                get
+                {
+                    return running;
+                }
+                set
+                {
+                    running = value;
+                    OnPropertyChanged("Running");
+                }
+            }
+
+            public int remove_counter
+            {
+                get; set;
+            }
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            protected virtual void OnPropertyChanged(string v)
+            {
+                PropertyChangedEventHandler handler = PropertyChanged;
+                if (handler != null)
+                {
+                    handler(this, new PropertyChangedEventArgs(v));
+                }
+            }
+
+            
         
+
+            
+
             public Pump_Timeline()
             {
 
@@ -212,23 +273,14 @@ namespace NASA_Pump_Control
                 remove_counter = 1 + remove_counter; //Count the removed for the multiplier
             }
 
-            public int get_remove_count()
-            {
-                return remove_counter;
-            }
+           
 
             public int get_flowrate()
             {
                 return flow_rate;
             }
-            public bool get_state()
-            {
-                return running;
-            }
-            public void set_state(bool change_to)
-            {
-                running = change_to;
-            }
+           
+           
           
 
             

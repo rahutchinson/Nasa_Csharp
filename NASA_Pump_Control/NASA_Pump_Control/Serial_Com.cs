@@ -38,24 +38,28 @@ namespace NASA_Pump_Control
 
             public void pump_on()
             {
+#if false
                 SerialPort port_ = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
                 System.Threading.Thread.Sleep(20);
+                port_.Open();
                 port_.Write(string.Format(message1));
                 port_.Write("P01G0" + cr);
                 port_.Write(string.Format(message1));
                 port_.WriteLine("P01S+" + flow + cr);
-                MessageBox.Show("PUMP ON");
+                
+                port_.Close(); 
+#endif
+                
             }
             public void set_comport(string port,int flow)
             {
                 this.flow = flow;
-               
+#if false
                 try
                 {
                     SerialPort port_ = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
                     port_.Open();
-                    //config
-                       //CR
+                   
 
                     port_.Write(message + cr);
                     System.Threading.Thread.Sleep(130);
@@ -75,19 +79,21 @@ namespace NASA_Pump_Control
                 {
                     
                 }
-                comport = port;
+                  comport = port;
+#endif
             }
 
             internal void pump_off()
             {
                 SerialPort port = new SerialPort(comport, baud, Parity.Odd, 7, StopBits.One);
-
+#if false
                 port.Open();
                 port.Write(string.Format(message1));
                 port.WriteLine("P01H" + cr);
 
                 port.Close();
-                MessageBox.Show("PUMP OFF");
+#endif
+                
             }
             internal void set_timeline(Timeline.Main_Timeline _given)
             {

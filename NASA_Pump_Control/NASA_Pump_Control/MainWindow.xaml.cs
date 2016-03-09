@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace NASA_Pump_Control
 {
@@ -36,13 +37,23 @@ namespace NASA_Pump_Control
         {
             Timeline.Main_Timeline _main_create = new Timeline.Main_Timeline();
             Add_pump_btn pump_btn = new Add_pump_btn(_main,_main_log,this);
+            _main_create.PropertyChanged += prop_PropertyChanged;
             stk_1_2.Children.Add(pump_btn);
             _main = _main_create;
+
             btn_update.Visibility = Visibility.Visible;
-                       
+            
             btn_main_show.Visibility = Visibility.Hidden;
             
+
         }
+
+        private void prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            MessageBox.Show("Test1");
+            lbl_elapsed.Text = _main.Elapsed.ToString();
+        }
+
         internal void _update(object sender, RoutedEventArgs e)
         {
             btn_main_start.Visibility = Visibility.Visible;
@@ -61,11 +72,19 @@ namespace NASA_Pump_Control
         internal void set_main_time(Timeline.Main_Timeline _toset_timeline)
         {
             _main = _toset_timeline;
+            
         }
 
         private void btn_main_start_Click(object sender, RoutedEventArgs e)
         {
             _main.main_initialize();
+            btn_main_start.Visibility = Visibility.Hidden;
+            lbl_elapsed.Text = _main.Elapsed.ToString();
+        }
+
+        private void btn_issue_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

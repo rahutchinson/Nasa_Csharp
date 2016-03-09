@@ -10,20 +10,20 @@
         <System:String x:Key="Pump_Grid">Test</System:String>
     </UserControl.Resources>
     <Grid Margin="0,0,20,18" Background="White">
-        <Grid HorizontalAlignment="Left" Height="188" Margin="1,1,0,0" VerticalAlignment="Top" Width="100" Background="#FFBFBFBF" Uid="{DynamicResource Pump_Grid}">
-            <TextBlock x:Name="lbl_pump" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" TextAlignment="Center" Background="#FFA29B95"><Run Text="Pump "/><Run Name="lbl_pump_num" FontWeight="Bold" Text="1"/></TextBlock>
+        <Grid HorizontalAlignment="Left" Margin="1,1,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Uid="{DynamicResource Pump_Grid}">
+            <TextBlock x:Name="lbl_pump" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Background="#FFA29B95" Width="90"><Run Text="Pump "/><Run Name="lbl_pump_num" FontWeight="Bold" Text="1"/></TextBlock>
             <Ellipse x:Name ="status_greem" Fill="#FF1BB429" HorizontalAlignment="Left" Height="38" Margin="10,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="80" Visibility="Hidden"/>
-            <Ellipse x:Name="status_red" Fill="#FFB41B1B" HorizontalAlignment="Left" Height="38" Margin="10,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="80"/>
-            <TextBlock x:Name="lbl_pump_status" HorizontalAlignment="Left" Margin="10,32,0,0" TextWrapping="Wrap" Text="Running" VerticalAlignment="Top" Width="80" TextAlignment="Center"/>
-            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="0,72,0,0" TextWrapping="Wrap" Text="Flow Rate" VerticalAlignment="Top" Width="100" TextAlignment="Center" Background="#FF819FF0"/>
-            <TextBlock x:Name="lbl_flow_rate" HorizontalAlignment="Left" Margin="10,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.016,-0.299" Width="80" TextAlignment="Center" Background="Blue" Text="mL/min" Foreground="White"/>
-            <Separator HorizontalAlignment="Left" Height="8" Margin="0,64,0,0" VerticalAlignment="Top" Width="100" Background="Black"/>
-            <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="0,114,0,0" TextWrapping="Wrap" Text="Cycle Details" VerticalAlignment="Top" Width="100" TextAlignment="Center" Background="Red"/>
-            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,135,0,0" TextWrapping="Wrap" Text="Time On:" VerticalAlignment="Top" Width="37" FontSize="9.333"/>
-            <TextBlock x:Name="lbl_Time_on" HorizontalAlignment="Left" Margin="52,135,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Width="37" FontSize="9.333" FontWeight="Bold"/>
-            <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="10,152,0,0" TextWrapping="Wrap" Text="Time Off:" VerticalAlignment="Top" Width="42" FontSize="9.333"/>
-            <TextBlock x:Name="lbl_Time_off" HorizontalAlignment="Left" Margin="52,152,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" Width="37" FontSize="9.333" FontWeight="Bold"/>
-            <TextBlock x:Name="lbl_iterations" HorizontalAlignment="Left" Margin="0,169,0,0" TextWrapping="Wrap" Text="# Cycles Done" VerticalAlignment="Top" Width="100" TextAlignment="Center" Background="#FFFFC4C4" FontSize="10.667"/>
+            <Ellipse x:Name="status_red" Fill="#FFB41B1B" HorizontalAlignment="Left" Height="38" Margin="0,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
+            <TextBlock x:Name="lbl_pump_status" HorizontalAlignment="Left" Margin="0,32,0,0" TextWrapping="Wrap" Text="Running" VerticalAlignment="Top" TextAlignment="Center" Width="90"/>
+            <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="0,72,0,0" TextWrapping="Wrap" Text="Flow Rate" VerticalAlignment="Top" TextAlignment="Center" Background="#FF819FF0" Width="90"/>
+            <TextBlock x:Name="lbl_flow_rate" HorizontalAlignment="Left" Margin="26,93,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-0.016,-0.299" TextAlignment="Center" Background="Blue" Text="mL/min" Foreground="White"/>
+            <Separator HorizontalAlignment="Left" Margin="0,64,0,0" VerticalAlignment="Top" Background="Black"/>
+            <TextBlock x:Name="textBlock1_Copy" HorizontalAlignment="Left" Margin="0,114,0,0" TextWrapping="Wrap" Text="Cycle Details" VerticalAlignment="Top" TextAlignment="Center" Background="Red" Width="90"/>
+            <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,135,0,0" TextWrapping="Wrap" Text="Time On:" VerticalAlignment="Top" FontSize="9.333"/>
+            <TextBlock x:Name="lbl_Time_on" HorizontalAlignment="Left" Margin="52,135,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" FontSize="9.333" FontWeight="Bold"/>
+            <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="10,152,0,0" TextWrapping="Wrap" Text="Time Off:" VerticalAlignment="Top" FontSize="9.333"/>
+            <TextBlock x:Name="lbl_Time_off" HorizontalAlignment="Left" Margin="52,152,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top" FontSize="9.333" FontWeight="Bold"/>
+            <TextBlock x:Name="lbl_iterations" HorizontalAlignment="Left" Margin="0,169,0,0" TextWrapping="Wrap" Text="# Cycles Done" VerticalAlignment="Top" TextAlignment="Center" Background="#FFFFC4C4" FontSize="10.667" Width="90"/>
         </Grid>
 
     </Grid>

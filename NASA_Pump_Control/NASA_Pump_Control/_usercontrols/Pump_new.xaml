@@ -8,8 +8,8 @@
     <Grid Margin="0,23,0,0" Background="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}">
         <Grid HorizontalAlignment="Left" Height="91" Margin="2,2,0,0" VerticalAlignment="Top" Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}" Width="119">
             <Label x:Name="label" Content="Create Cycle" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="14.667" FontWeight="Bold" Margin="10,0,0,0" Width="99"/>
-            <TextBox x:Name="txt_time_on" HorizontalAlignment="Left" Margin="63,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" Text="20"/>
-            <TextBox x:Name="txt_time_off" HorizontalAlignment="Left" Margin="63,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" Text="20"/>
+            <TextBox x:Name="txt_time_on" HorizontalAlignment="Left" Margin="63,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" Text="5"/>
+            <TextBox x:Name="txt_time_off" HorizontalAlignment="Left" Margin="63,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" Text="5"/>
             <Label x:Name="label1" Content="Time On" HorizontalAlignment="Left" Margin="1,29,0,0" VerticalAlignment="Top"/>
             <Label x:Name="label1_Copy" Content="Time Off" HorizontalAlignment="Left" Margin="0,55,0,0" VerticalAlignment="Top"/>
         </Grid>
