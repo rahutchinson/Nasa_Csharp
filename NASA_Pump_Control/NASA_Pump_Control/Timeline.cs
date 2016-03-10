@@ -1,4 +1,6 @@
-﻿using System;
+﻿#define DEBUG
+//#define timer
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -6,11 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace NASA_Pump_Control
 {
     class Timeline
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        
 
         public class Main_Timeline : Timeline,INotifyPropertyChanged
         {
@@ -18,11 +21,23 @@ namespace NASA_Pump_Control
             LinkedList<Pump_Timeline> pump_col = new LinkedList<Pump_Timeline>();
             DateTime time_begin;
             DateTime time_end;
+            public event PropertyChangedEventHandler PropertyChanged;
+            int cycle_time_total = 0;
+           
+            long timeline_start = 0;
+        
+            long timeline_end = 0;
+            int cycle_time_on = 0;
+            
+            
             static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
 
            
             
             private long elapsed;
+            private int cycle_count=0;
+            private int cycle_internal_count =0;
+
             public long Elapsed
             {
                 get
@@ -32,7 +47,7 @@ namespace NASA_Pump_Control
                 set
                 {
                     elapsed = value;
-                    OnPropertyChanged("Elapsed");
+                    
                 }
             }
             
@@ -68,75 +83,105 @@ namespace NASA_Pump_Control
             /// <summary>
             /// This will begin the pumps
             /// </summary>
+            /// 
+          
+
             public void main_initialize()
             {
                 time_begin = DateTime.Now;
                 time_end = time_begin.AddDays(total_days);
-               
+                for(LinkedListNode < Pump_Timeline > node = pump_col.First; node != null; node = node.Next)
+                {
+                    node.Value.runtime_total_cal();
+                }
+
+#if timer
                 myTimer.Enabled = true;
-                
+
                 myTimer.Start();
                 myTimer.Interval = 1;
 
 
-               myTimer.Tick += new EventHandler(TimerEventProcessor);
-                
-            }
-            
-
-            // This is the method to run when the timer is raised.
-            private void TimerEventProcessor(Object myObject, EventArgs myEventArgs)
-            {
-                myTimer.Stop();
-
-
-                System.TimeSpan elapsed_ = DateTime.Now - time_begin; 
-                Elapsed = get_total_seconds(elapsed_);
+                myTimer.Tick += new EventHandler(TimerEventProcessor); 
+#endif
                 
 
-                for(LinkedListNode<Pump_Timeline> node = pump_col.First; node != null;)
+                do
                 {
-                    int cycle_time_total = node.Value.get_next_cycle().Value.get_time_total();
-                    int cycle_multiplier = node.Value.remove_counter;
-                    long timeline_start = node.Value.get_Start();
+                    System.TimeSpan elapsed_ = DateTime.Now - time_begin;
+                    Elapsed = get_total_seconds(elapsed_);
 
-                    long timeline_end = node.Value.get_runtime_total();
-                    int cycle_time_on = node.Value.get_next_cycle().Value.get_times()[0];
+                    Console.WriteLine(Elapsed + " cycle_time_total: " + cycle_time_total + " timeline_end: " + timeline_end + " timeline_start: " + timeline_start + " cycle_internal_count: " + cycle_internal_count + " cycle_time_on: " + cycle_time_on + " cycle_count: " + cycle_count);
 
-
-                    //All Pump on Scenarios
-                    if (Elapsed == timeline_start || Elapsed == timeline_start + (cycle_time_total * (cycle_multiplier - 1)))
+                    for (LinkedListNode<Pump_Timeline> node = pump_col.First; node != null;node = node.Next)
                     {
-                        if (node.Value.Running == false)
-                        {
-                                node.Value.get_serial().pump_on();
-                                node.Value.Running = true;
+                        cycle_time_total = node.Value.get_next_cycle().Value.get_time_total();
+                        
+                        cycle_count = node.Value.iterations;
+                        cycle_internal_count = node.Value.internal_;
+                        timeline_start = node.Value.get_Start();
 
-                        }
-                    }
-                    //All Pump off Scenarios
-                    if (Elapsed == timeline_end || Elapsed == cycle_time_on * cycle_multiplier)
-                    {
-                        if (node.Value.Running)
+                        timeline_end = node.Value.get_total_runtime();
+                        cycle_time_on = node.Value.get_next_cycle().Value.get_times()[0];
+
+                        
+
+                        Console.WriteLine("**********************STATE:" + node.Value.Running);
+                        
+
+
+                        //All Pump on Scenarios
+                        if (Elapsed == timeline_start || Elapsed == timeline_start + (cycle_time_total * cycle_count))
                         {
+                            Console.WriteLine("Condition 1 - On");
+                            if (node.Value.Running == false)
                             {
-
-
-                                node.Value.get_serial().pump_off();
-                                node.Value.Running = false;
-                                node.Value.remove_cycle();
+                                if (Elapsed != timeline_end)
+                                {
+                                    Console.WriteLine("Pump On");
+                                    node.Value.get_serial().pump_on();
+                                    node.Value.internal_cycle();
+                                    node.Value.Running = true;
+                                }
+                                
+                                node.Value.iteration();
 
                             }
                         }
+                        //All Pump off Scenarios
+                        else if (Elapsed == timeline_end || Elapsed == cycle_time_on * (cycle_internal_count) || Elapsed == cycle_time_on)
+                        {
+                            Console.WriteLine("Condition 1 - off");
+                            if (node.Value.Running)
+                            {
 
+                                Console.WriteLine("Pump Off");
+                                node.Value.get_serial().pump_off();
+                                node.Value.Running = false;
+                                node.Value.internal_cycle();
+                              
+
+                            }
+
+                        }
+                        Console.WriteLine(node.Value.get_cycle_list().Count);
+                        if(node.Value.get_cycle_list().Count == 0)
+                        {
+                            pump_col.Remove(node.Value);
+                        }
+                        node.Value.update();
                     }
-                    node = node.Next;
+                    
+                    System.Threading.Thread.Sleep(50);
                 }
-
-                myTimer.Start();
+                while (DateTime.Compare(time_begin, time_end)<0);
                 
-                myTimer.Tick += new EventHandler(TimerEventProcessor);
             }
+
+            
+
+            // This is the method to run when the timer is raised.
+
 
             public int get_total_seconds(TimeSpan _given)
             {
@@ -144,6 +189,8 @@ namespace NASA_Pump_Control
                 total += _given.Hours * 60 * 60;
                 total += _given.Minutes * 60;
                 total += _given.Seconds;
+                
+                
 
                 return total;
             }
@@ -175,15 +222,22 @@ namespace NASA_Pump_Control
           
         }
 
-        public class Pump_Timeline : Timeline,INotifyPropertyChanged
+        public class Pump_Timeline : Timeline, INotifyPropertyChanged //****************************************************************************************************************************************************
         {
             Serial_Com.Serial serial_con = new Serial_Com.Serial();
             private long time_start;
             private int total_runtime;
-            LinkedList<Cycle> pump_list = new LinkedList<Cycle>();
+            
+            public LinkedList<Cycle> cycle_list = new LinkedList<Cycle>();
 
             int flow_rate = 0;
-            private Boolean running;
+            private Boolean running = false;
+            public int internal_{get;set;}
+
+            public LinkedList<Cycle> get_cycle_list()
+            {
+                return cycle_list;
+            }
 
             public Boolean Running
             {
@@ -194,13 +248,20 @@ namespace NASA_Pump_Control
                 set
                 {
                     running = value;
-                    OnPropertyChanged("Running");
+                    
                 }
             }
-
-            public int remove_counter
+            private int Iterations =0;
+            public int iterations
             {
-                get; set;
+                get
+                {
+                    return Iterations;
+                }
+                 set
+                {
+                    Iterations = value;
+                }
             }
 
             public event PropertyChangedEventHandler PropertyChanged;
@@ -221,7 +282,7 @@ namespace NASA_Pump_Control
 
             public Pump_Timeline()
             {
-
+                
             }
 
             public Pump_Timeline(Cycle _cycle, int iterations, long time_start, Main_Timeline add_to_Main, string comport, int flow) //TODO: Redo time_start has to work with tick from begining
@@ -231,26 +292,32 @@ namespace NASA_Pump_Control
                 serial_con.set_comport(comport,flow); //set com for pump
                 
 
-                for(int i = 1; i < iterations; i++)
+                for(int i = 1; i < iterations+2; i++)
                 {
-                    pump_list.AddFirst(_cycle);
+                    cycle_list.AddFirst(_cycle);
                 }
 
                 add_to_Main.add_pump_timeline(this);
             }
 
-            public int get_runtime_total()
+            public void runtime_total_cal()
             {
-               int total = 0;
-               for(LinkedListNode<Cycle> node = pump_list.First; node != null;)
+
+                int total = 0;
+                LinkedListNode<Cycle> node = cycle_list.First;
+                for (node = cycle_list.First; node != null;)
                 {
                     total = total + node.Value.get_time_total(); // gets total time for given cycle in the list;
                     node = node.Next;
+                    
                 }
-                total_runtime = total;
-
-                return total;
+                total_runtime = total - cycle_list.First.Value.get_time_total();
             }
+            public int get_total_runtime()
+            {
+                return total_runtime;
+            }
+           
 
             public long get_Start()
             {
@@ -264,28 +331,30 @@ namespace NASA_Pump_Control
 
             public LinkedListNode<Cycle> get_next_cycle()
             {
-                return pump_list.First;
+                return cycle_list.First;
             }
 
-            public void remove_cycle()
+            public void iteration()
             {
-                pump_list.RemoveFirst();
-                remove_counter = 1 + remove_counter; //Count the removed for the multiplier
+                cycle_list.RemoveFirst();
+                iterations = 1 + iterations; //Count the removed for the multiplier
             }
-
+            public void internal_cycle()
+            {
+                internal_ = 1 + internal_; 
+            }
+                
            
 
             public int get_flowrate()
             {
                 return flow_rate;
             }
-           
-           
-          
 
-            
-
-
+            internal void update()
+            {
+                OnPropertyChanged("UPDATE");
+            }
         }
     }
 

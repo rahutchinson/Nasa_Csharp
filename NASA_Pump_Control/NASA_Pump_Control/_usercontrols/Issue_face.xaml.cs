@@ -21,8 +21,10 @@ namespace NASA_Pump_Control
     /// </summary>
     public partial class Issue_face : UserControl
     {
-        public Issue_face()
+        Window _me = new Window();
+        public Issue_face(Window me)
         {
+            _me = me;
             InitializeComponent();
         }
 
@@ -40,7 +42,7 @@ namespace NASA_Pump_Control
             createIssue.Assignee = "rahutchinson";
             var issue = await client.Issue.Create("rahutchinson", "Nasa_Csharp", createIssue);
 
-            
+            _me.Close();
         }
        
     }

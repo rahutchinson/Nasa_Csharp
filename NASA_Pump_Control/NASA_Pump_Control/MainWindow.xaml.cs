@@ -1,19 +1,6 @@
-﻿using NASA_Pump_Control._usercontrols;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.ComponentModel;
 
 namespace NASA_Pump_Control
 {
@@ -36,9 +23,11 @@ namespace NASA_Pump_Control
         private void btn_main_show_Click(object sender, RoutedEventArgs e)
         {
             Timeline.Main_Timeline _main_create = new Timeline.Main_Timeline();
-            Add_pump_btn pump_btn = new Add_pump_btn(_main,_main_log,this);
-            _main_create.PropertyChanged += prop_PropertyChanged;
-            stk_1_2.Children.Add(pump_btn);
+            Button add_pump = new Button();
+            add_pump.Content = "Add New Pump";
+            add_pump.Click += new RoutedEventHandler(this.open_new_pump);
+           
+            Main_grid.Children.Add(add_pump);
             _main = _main_create;
 
             btn_update.Visibility = Visibility.Visible;
@@ -47,12 +36,17 @@ namespace NASA_Pump_Control
             
 
         }
-
-        private void prop_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        void open_new_pump(Object sender,EventArgs e)
         {
-            MessageBox.Show("Test1");
-            lbl_elapsed.Text = _main.Elapsed.ToString();
+            var host = new Window();
+            Pump_new OP = new Pump_new(_main,_main_log,host,this);
+
+            host.Content = OP;
+            host.Height = 350;
+            host.Width = 400;
+            host.Show();
         }
+        
 
         internal void _update(object sender, RoutedEventArgs e)
         {
@@ -63,7 +57,7 @@ namespace NASA_Pump_Control
                 {
                     if(i >= (stk_1_3.Children.Count))
                     {
-                        Main_RUN pump = new Main_RUN(_main.get_node(i).Value, i);
+                        Main_RUN pump = new Main_RUN(_main.get_node(i).Value, i,pump);
                         stk_1_3.Children.Add(pump);
                     }
                 }
@@ -79,12 +73,18 @@ namespace NASA_Pump_Control
         {
             _main.main_initialize();
             btn_main_start.Visibility = Visibility.Hidden;
-            lbl_elapsed.Text = _main.Elapsed.ToString();
+            
         }
 
         private void btn_issue_Click(object sender, RoutedEventArgs e)
         {
+            var host = new Window();
+            Issue_face OP = new Issue_face(host);
 
+            host.Content = OP;
+            host.Height = 350;
+            host.Width = 400;
+            host.Show();
         }
     }
 }

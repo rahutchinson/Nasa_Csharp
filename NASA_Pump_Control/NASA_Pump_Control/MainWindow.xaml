@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:NASA_Pump_Control"
         mc:Ignorable="d"
         Title="Pump Control v.001_beta" Height="400" Width="525">
-    <Grid>
+    <Grid Name="Main_grid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />

@@ -82,9 +82,6 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_usercontrols\Add_pump_btn.xaml.cs">
-      <DependentUpon>Add_pump_btn.xaml</DependentUpon>
-    </Compile>
     <Compile Include="_usercontrols\Issue_face.xaml.cs">
       <DependentUpon>Issue_face.xaml</DependentUpon>
     </Compile>
@@ -129,10 +126,6 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="_usercontrols\Add_pump_btn.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="_usercontrols\Issue_face.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -89,7 +89,7 @@ namespace NASA_Pump_Control
             }
             min = min + hr * 60;
             sec = sec + min * 60;
-            return sec;
+            return sec*1000;
         }
         private string get_comport()
         {

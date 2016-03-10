@@ -12,7 +12,7 @@
     <Grid Margin="0,0,20,18" Background="White">
         <Grid HorizontalAlignment="Left" Margin="1,1,0,0" VerticalAlignment="Top" Background="#FFBFBFBF" Uid="{DynamicResource Pump_Grid}">
             <TextBlock x:Name="lbl_pump" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" TextAlignment="Center" Background="#FFA29B95" Width="90"><Run Text="Pump "/><Run Name="lbl_pump_num" FontWeight="Bold" Text="1"/></TextBlock>
-            <Ellipse x:Name ="status_greem" Fill="#FF1BB429" HorizontalAlignment="Left" Height="38" Margin="10,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="80" Visibility="Hidden"/>
+            <Ellipse x:Name ="status_green" Fill="#FF1BB429" HorizontalAlignment="Left" Height="38" Margin="10,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="80" Visibility="Hidden"/>
             <Ellipse x:Name="status_red" Fill="#FFB41B1B" HorizontalAlignment="Left" Height="38" Margin="0,21,0,0" Stroke="Black" VerticalAlignment="Top" Width="90"/>
             <TextBlock x:Name="lbl_pump_status" HorizontalAlignment="Left" Margin="0,32,0,0" TextWrapping="Wrap" Text="Running" VerticalAlignment="Top" TextAlignment="Center" Width="90"/>
             <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="0,72,0,0" TextWrapping="Wrap" Text="Flow Rate" VerticalAlignment="Top" TextAlignment="Center" Background="#FF819FF0" Width="90"/>
