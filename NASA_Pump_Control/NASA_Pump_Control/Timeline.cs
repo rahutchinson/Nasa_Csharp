@@ -19,37 +19,11 @@ namespace NASA_Pump_Control
         {
             int total_days = 1;
             LinkedList<Pump_Timeline> pump_col = new LinkedList<Pump_Timeline>();
-            DateTime time_begin;
-            DateTime time_end;
+            
             public event PropertyChangedEventHandler PropertyChanged;
-            int cycle_time_total = 0;
            
-            long timeline_start = 0;
+
         
-            long timeline_end = 0;
-            int cycle_time_on = 0;
-            
-            
-            static System.Windows.Forms.Timer myTimer = new System.Windows.Forms.Timer();
-
-           
-            
-            private long elapsed;
-            private int cycle_count=0;
-            private int cycle_internal_count =0;
-
-            public long Elapsed
-            {
-                get
-                {
-                    return this.elapsed;
-                }
-                set
-                {
-                    elapsed = value;
-                    
-                }
-            }
             
 
             protected virtual void OnPropertyChanged(string v)
@@ -86,15 +60,10 @@ namespace NASA_Pump_Control
             /// 
           
 
-            public void main_initialize()
+            public LinkedList<Pump_Timeline> main_initialize()
             {
-                time_begin = DateTime.Now;
-                time_end = time_begin.AddDays(total_days);
-                for(LinkedListNode < Pump_Timeline > node = pump_col.First; node != null; node = node.Next)
-                {
-                    node.Value.runtime_total_cal();
-                }
 
+                return pump_col;
 #if timer
                 myTimer.Enabled = true;
 
@@ -104,78 +73,8 @@ namespace NASA_Pump_Control
 
                 myTimer.Tick += new EventHandler(TimerEventProcessor); 
 #endif
-                
+                //Main Loop
 
-                do
-                {
-                    System.TimeSpan elapsed_ = DateTime.Now - time_begin;
-                    Elapsed = get_total_seconds(elapsed_);
-
-                    Console.WriteLine(Elapsed + " cycle_time_total: " + cycle_time_total + " timeline_end: " + timeline_end + " timeline_start: " + timeline_start + " cycle_internal_count: " + cycle_internal_count + " cycle_time_on: " + cycle_time_on + " cycle_count: " + cycle_count);
-
-                    for (LinkedListNode<Pump_Timeline> node = pump_col.First; node != null;node = node.Next)
-                    {
-                        cycle_time_total = node.Value.get_next_cycle().Value.get_time_total();
-                        
-                        cycle_count = node.Value.iterations;
-                        cycle_internal_count = node.Value.internal_;
-                        timeline_start = node.Value.get_Start();
-
-                        timeline_end = node.Value.get_total_runtime();
-                        cycle_time_on = node.Value.get_next_cycle().Value.get_times()[0];
-
-                        
-
-                        Console.WriteLine("**********************STATE:" + node.Value.Running);
-                        
-
-
-                        //All Pump on Scenarios
-                        if (Elapsed == timeline_start || Elapsed == timeline_start + (cycle_time_total * cycle_count))
-                        {
-                            Console.WriteLine("Condition 1 - On");
-                            if (node.Value.Running == false)
-                            {
-                                if (Elapsed != timeline_end)
-                                {
-                                    Console.WriteLine("Pump On");
-                                    node.Value.get_serial().pump_on();
-                                    node.Value.internal_cycle();
-                                    node.Value.Running = true;
-                                }
-                                
-                                node.Value.iteration();
-
-                            }
-                        }
-                        //All Pump off Scenarios
-                        else if (Elapsed == timeline_end || Elapsed == cycle_time_on * (cycle_internal_count) || Elapsed == cycle_time_on)
-                        {
-                            Console.WriteLine("Condition 1 - off");
-                            if (node.Value.Running)
-                            {
-
-                                Console.WriteLine("Pump Off");
-                                node.Value.get_serial().pump_off();
-                                node.Value.Running = false;
-                                node.Value.internal_cycle();
-                              
-
-                            }
-
-                        }
-                        Console.WriteLine(node.Value.get_cycle_list().Count);
-                        if(node.Value.get_cycle_list().Count == 0)
-                        {
-                            pump_col.Remove(node.Value);
-                        }
-                        node.Value.update();
-                    }
-                    
-                    System.Threading.Thread.Sleep(50);
-                }
-                while (DateTime.Compare(time_begin, time_end)<0);
-                
             }
 
             

@@ -85,9 +85,6 @@
     <Compile Include="_usercontrols\Issue_face.xaml.cs">
       <DependentUpon>Issue_face.xaml</DependentUpon>
     </Compile>
-    <Compile Include="_usercontrols\Main_RUN.xaml.cs">
-      <DependentUpon>Main_RUN.xaml</DependentUpon>
-    </Compile>
     <Compile Include="_usercontrols\Pump_new.xaml.cs">
       <DependentUpon>Pump_new.xaml</DependentUpon>
     </Compile>
@@ -128,10 +125,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="_usercontrols\Issue_face.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="_usercontrols\Main_RUN.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
