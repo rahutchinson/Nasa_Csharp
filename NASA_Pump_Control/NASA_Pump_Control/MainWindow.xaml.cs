@@ -13,10 +13,10 @@ namespace NASA_Pump_Control
     {
         
         Log _main_log = new Log();
-      
+
         Timeline.Main_Timeline _main = new Timeline.Main_Timeline();
         LinkedList<Timeline.Pump_Timeline> col_pumps = new LinkedList<Timeline.Pump_Timeline>();
-
+        int pump_amt = 0;
         int total_days = 1;
 
         DateTime time_begin;
@@ -32,7 +32,7 @@ namespace NASA_Pump_Control
         long elapsed;
         int cycle_count = 0;
         int cycle_internal_count = 0;
-
+   
         public MainWindow()
         {
             InitializeComponent();
@@ -118,23 +118,16 @@ namespace NASA_Pump_Control
                     }
                     node.Value.update();
                 }
-                interface_update();
+               
                 System.Threading.Thread.Sleep(50);
             }
             while (DateTime.Compare(time_begin, time_end) < 0);
 
         }
 
-        private void interface_update()
-        {
-            for (LinkedListNode<Timeline.Pump_Timeline> node = col_pumps.First; node != null; node = node.Next)
-            {
-                
+      
 
-            }
-        }
-
-        private void btn_main_show_Click(object sender, RoutedEventArgs e)
+        private void btn_create_Timeline(object sender, RoutedEventArgs e)
         {
             Timeline.Main_Timeline _main_create = new Timeline.Main_Timeline();
             Button add_pump = new Button();
@@ -146,7 +139,7 @@ namespace NASA_Pump_Control
 
             btn_update.Visibility = Visibility.Visible;
             
-            btn_main_show.Visibility = Visibility.Hidden;
+            btn_create_timeline.Visibility = Visibility.Hidden;
             
 
         }
@@ -162,11 +155,6 @@ namespace NASA_Pump_Control
         }
         
 
-        internal void _update(object sender, RoutedEventArgs e)
-        {
-            btn_main_start.Visibility = Visibility.Visible;
-          
-        }
         internal void set_main_time(Timeline.Main_Timeline _toset_timeline)
         {
             _main = _toset_timeline;
@@ -190,6 +178,24 @@ namespace NASA_Pump_Control
             host.Height = 350;
             host.Width = 400;
             host.Show();
+        }
+        internal void _update(object sender, RoutedEventArgs e)
+        {
+            btn_main_start.Visibility = Visibility.Visible;
+            if (_main.get_pump_amt() > pump_amt)
+            {
+                for (int i = 0; i < _main.get_pump_amt(); i++)
+                {
+                    if (i >= (panel_pump.Children.Count-1))
+                    {
+                        Pump_Controls pump = new Pump_Controls();
+                        panel_pump.Children.Add(pump);
+                        pump.txt_Pump_num.Text = "Pump " + (i+1);
+                        pump.Visibility = Visibility.Visible;
+                        
+                    }
+                }
+            }
         }
     }
 }

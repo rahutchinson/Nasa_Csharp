@@ -82,6 +82,9 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pump_Controls.xaml.cs">
+      <DependentUpon>Pump_Controls.xaml</DependentUpon>
+    </Compile>
     <Compile Include="_usercontrols\Issue_face.xaml.cs">
       <DependentUpon>Issue_face.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,10 @@
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pump_Controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="_usercontrols\Issue_face.xaml">
       <Generator>MSBuild:Compile</Generator>

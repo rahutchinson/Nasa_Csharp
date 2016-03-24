@@ -21,14 +21,14 @@ namespace NASA_Pump_Control
     public partial class Pump_new : UserControl
     {
         private Timeline.Main_Timeline _main_line = new Timeline.Main_Timeline();
-        internal Log __log = new Log();
+        
         Window current = new Window();
         MainWindow need_toset = new MainWindow();
         internal Pump_new(Timeline.Main_Timeline _sent_line, Log _log,Window current_window, MainWindow to_set)
         {
             need_toset = to_set;
             current = current_window;
-            __log = _log;
+            
             _main_line = _sent_line;
             InitializeComponent();
         }
@@ -53,7 +53,7 @@ namespace NASA_Pump_Control
             }
             catch (FormatException e)
             {
-                __log.record(e.Message.ToString());
+                
             }
             int[] ar_return = { on, off };
             return ar_return;
@@ -68,7 +68,7 @@ namespace NASA_Pump_Control
             }
             catch (FormatException e)
             {
-                __log.record(e.Message.ToString());
+                
             }
             return it;
         }
@@ -85,7 +85,7 @@ namespace NASA_Pump_Control
             }
             catch (FormatException e)
             {
-                __log.record(e.Message.ToString());
+                
             }
             min = min + hr * 60;
             sec = sec + min * 60;
@@ -105,7 +105,7 @@ namespace NASA_Pump_Control
             }
             catch (FormatException e)
             {
-                __log.record(e.Message.ToString());
+                
             }
             return flow;
         }

@@ -29,3 +29,6 @@ C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\D
 C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\NASA_Pump_Control.csproj.GenerateResource.Cache
 C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\NASA_Pump_Control.exe
 C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\NASA_Pump_Control.pdb
+C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\Pump_Controls.g.cs
+C:\Users\ryan\Source\Repos\Nasa_Csharp\NASA_Pump_Control\NASA_Pump_Control\obj\Debug\Pump_Controls.baml

@@ -15,27 +15,11 @@ namespace NASA_Pump_Control
     {
         
 
-        public class Main_Timeline : Timeline,INotifyPropertyChanged
+        public class Main_Timeline : Timeline
         {
             int total_days = 1;
             LinkedList<Pump_Timeline> pump_col = new LinkedList<Pump_Timeline>();
             
-            public event PropertyChangedEventHandler PropertyChanged;
-           
-
-        
-            
-
-            protected virtual void OnPropertyChanged(string v)
-            {
-                PropertyChangedEventHandler handler = PropertyChanged;
-                if (handler != null)
-                {
-                    handler(this, new PropertyChangedEventArgs(v));
-                }
-            }
-
-
             /// <summary>
             /// Constructor for Main Timeline
             /// The Main timeline will contain the timelines of the specific pumps.
